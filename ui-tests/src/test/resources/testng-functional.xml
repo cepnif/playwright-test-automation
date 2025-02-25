@@ -1,0 +1,29 @@
+<suite name="Playwright Cross-Browser Tests" parallel="tests" thread-count="4">
+    <test name="Chromium">
+        <parameter name="browser" value="chromium"/>
+        <classes>
+            <class name="ui.runners.UIFunctionalTestRunner"/>
+        </classes>
+    </test>
+
+    <test name="Firefox">
+        <parameter name="browser" value="firefox"/>
+        <classes>
+            <class name="ui.runners.UIFunctionalTestRunner"/>
+        </classes>
+    </test>
+
+    <test name="WebKit">
+        <parameter name="browser" value="webkit"/>
+        <classes>
+            <class name="ui.runners.UIFunctionalTestRunner"/>
+        </classes>
+    </test>
+
+    <test name="Edge">
+        <parameter name="browser" value="edge"/>
+        <classes>
+            <class name="ui.runners.UIFunctionalTestRunner"/>
+        </classes>
+    </test>
+</suite>
