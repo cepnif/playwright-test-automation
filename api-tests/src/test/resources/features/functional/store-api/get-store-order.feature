@@ -1,10 +1,11 @@
+@functional @get
 Feature: Retrieve Store Order using GET request
 
   Background:
     Given the store API is available
 
   Scenario: Successfully retrieve an order by ID using GET request
-    Given an existing order with ID 101
+    Given an existing order with ID 1
     When a GET request is sent to retrieve the order
     Then the response status code should be 200
     And the order details should be displayed
@@ -18,4 +19,4 @@ Feature: Retrieve Store Order using GET request
     Examples:
       | orderId |
       | 99999   |
-      | abc     |
+      | -1      |

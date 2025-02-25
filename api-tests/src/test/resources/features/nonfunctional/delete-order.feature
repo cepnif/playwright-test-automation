@@ -1,3 +1,4 @@
+@non-functional
 Feature: Load testing for order deletion using DELETE request
 
   Background:

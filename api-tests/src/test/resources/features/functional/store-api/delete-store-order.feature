@@ -1,3 +1,4 @@
+@functional @delete
 Feature: Delete Store Order using DELETE request
 
   Background:

@@ -1,3 +1,4 @@
+@non-functional
 Feature: Validate response time for retrieving an order using GET request
 
   Background:
