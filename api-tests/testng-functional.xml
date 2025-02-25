@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name="API Functional Test Suite" parallel="tests" thread-count="3">
+    <test name="Functional API Tests">
+        <classes>
+            <class name="api.runners.APIFunctionalTestRunner"/>
+        </classes>
+    </test>
+</suite>
