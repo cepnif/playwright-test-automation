@@ -1,3 +1,4 @@
+@functional @post
 Feature: Place an Order using POST request
 
   Background:
