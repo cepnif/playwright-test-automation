@@ -2,6 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://www.w3.org/xsd/maven-4.0.0.xsd">
+
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.saucedemo</groupId>
@@ -12,6 +13,7 @@
     <modules>
         <module>api-tests</module>
         <module>ui-tests</module>
+        <module>common-utils</module>
     </modules>
 
     <properties>
@@ -38,36 +40,36 @@
             <dependency>
                 <groupId>com.microsoft.playwright</groupId>
                 <artifactId>playwright</artifactId>
-                <version>1.36.0</version>
+                <version>1.39.0</version>
             </dependency>
             <dependency>
                 <groupId>org.seleniumhq.selenium</groupId>
                 <artifactId>selenium-java</artifactId>
-                <version>4.9.0</version>
+                <version>4.14.1</version>
             </dependency>
 
-            <!-- ✅ BDD CUCUMBER DEPENDENCIES (API & UI) -->
+            <!-- ✅ CUCUMBER BDD DEPENDENCIES (API & UI) -->
             <dependency>
                 <groupId>io.cucumber</groupId>
                 <artifactId>cucumber-java</artifactId>
-                <version>7.5.0</version>
+                <version>7.13.0</version>
             </dependency>
             <dependency>
                 <groupId>io.cucumber</groupId>
                 <artifactId>cucumber-testng</artifactId>
-                <version>7.5.0</version>
+                <version>7.13.0</version>
             </dependency>
             <dependency>
                 <groupId>net.masterthought</groupId>
                 <artifactId>cucumber-reporting</artifactId>
-                <version>5.7.3</version>
+                <version>5.7.6</version>
             </dependency>
 
             <!-- ✅ TEST EXECUTION DEPENDENCIES -->
             <dependency>
                 <groupId>org.testng</groupId>
                 <artifactId>testng</artifactId>
-                <version>7.6.1</version>
+                <version>7.7.0</version>
                 <scope>test</scope>
             </dependency>
 
@@ -83,7 +85,7 @@
                 <version>2.17.1</version>
             </dependency>
 
-            <!-- ✅ JSON Processing -->
+            <!-- ✅ JSON PROCESSING -->
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-databind</artifactId>
@@ -94,48 +96,51 @@
             <dependency>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
+                <version>3.0.0-M7</version>
             </dependency>
             <dependency>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
-                <version>3.0.0-M5</version>
+                <version>3.0.0-M7</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
 
     <build>
+        <resources>
+            <resource>
+                <directory>${project.basedir}/config</directory>
+                <includes>
+                    <include>config.properties</include>
+                </includes>
+                <filtering>false</filtering>
+                <targetPath>${project.build.outputDirectory}</targetPath>
+            </resource>
+        </resources>
+
         <plugins>
-            <!-- Maven Surefire Plugin for Running Tests -->
+            <!-- ✅ Maven Resources Plugin to copy config.properties -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
-                <configuration>
-                    <parallel>methods</parallel>
-                    <threadCount>3</threadCount>
-                    <includes>
-                        <include>**/*Test.java</include>
-                    </includes>
-                </configuration>
-            </plugin>
-
-            <!-- Cucumber Reporting Plugin -->
-            <plugin>
-                <groupId>net.masterthought</groupId>
-                <artifactId>maven-cucumber-reporting</artifactId>
-                <version>5.7.6</version>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.2.0</version>
                 <executions>
                     <execution>
-                        <id>generate-cucumber-report</id>
-                        <phase>verify</phase>
+                        <id>copy-config</id>
+                        <phase>process-resources</phase>
                         <goals>
-                            <goal>generate</goal>
+                            <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <projectName>Test Automation Framework</projectName>
-                            <outputDirectory>${project.build.directory}/cucumber-reports</outputDirectory>
-                            <jsonFiles>${project.build.directory}/cucumber-reports/*.json</jsonFiles>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}/config</directory>
+                                    <includes>
+                                        <include>config.properties</include>
+                                    </includes>
+                                </resource>
+                            </resources>
                         </configuration>
                     </execution>
                 </executions>
