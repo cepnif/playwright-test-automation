@@ -15,7 +15,7 @@ public class HTTPRequestBuilder {
 
     public HTTPRequestBuilder(APIRequestContext requestContext) {
         this.requestContext = requestContext;
-        this.baseUrl = ConfigReader.getBaseUrl(); // Read Base URL from config.properties
+        this.baseUrl = ConfigReader.getApiBaseUrl(); // Read Base URL from config.properties
     }
 
     /**

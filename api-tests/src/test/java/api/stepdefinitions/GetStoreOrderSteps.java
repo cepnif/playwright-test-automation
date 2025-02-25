@@ -25,7 +25,7 @@ public class GetStoreOrderSteps {
 
     @Given("the store API is available")
     public void the_store_API_is_available() {
-        String baseUrl = ConfigReader.getBaseUrl();
+        String baseUrl = ConfigReader.getApiBaseUrl();
         playwright = Playwright.create();
         requestContext = playwright.request().newContext(new APIRequest.NewContextOptions().setBaseURL(baseUrl));
 

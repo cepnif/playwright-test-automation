@@ -20,7 +20,11 @@ public class ConfigReader {
         return properties.getProperty(key);
     }
 
-    public static String getBaseUrl() {
+    public static String getApiBaseUrl() {
         return getProperty("api.base.url.test");
+    }
+
+    public static String getUiBaseUrl() {
+        return getProperty("ui.base.url.test");
     }
 }
