@@ -6,17 +6,30 @@ import com.microsoft.playwright.options.WaitForSelectorState;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Represents the Shopping Cart Page in the SauceDemo UI test automation framework.
+ */
 public class CartPage {
     private static final Logger logger = LoggerFactory.getLogger(CartPage.class);
     private final Page page;
     private final Locator checkoutButton;
 
+    /**
+     * Constructor for the CartPage.
+     *
+     * @param page The Playwright page instance used for browser interactions.
+     */
     public CartPage(Page page) {
         this.page = page;
         this.checkoutButton = page.locator("#checkout");
     }
 
-    // ✅ Wait for cart to load with logging
+    /**
+     * Waits for the shopping cart page to load completely.
+     * Logs the status of the cart loading process.
+     *
+     * @throws RuntimeException if the cart page does not load within the timeout period.
+     */
     public void waitForCartToLoad() {
         logger.info("🛒 Waiting for the shopping cart to load...");
         try {
@@ -29,7 +42,13 @@ public class CartPage {
         }
     }
 
-    // ✅ Retrieve product text from cart
+    /**
+     * Retrieves the text of a specified item in the shopping cart.
+     *
+     * @param productName The name of the product whose text needs to be retrieved.
+     * @return The product name text if found.
+     * @throws RuntimeException if the product text cannot be retrieved.
+     */
     public String getItemText(String productName) {
         logger.info("🔍 Fetching item text for: {}", productName);
         try {
@@ -42,7 +61,12 @@ public class CartPage {
         }
     }
 
-    // ✅ Proceed to checkout with logging
+    /**
+     * Clicks the 'Checkout' button to proceed to the checkout process.
+     * Logs the process and handles potential failures.
+     *
+     * @throws RuntimeException if the checkout button click fails.
+     */
     public void proceedToCheckout() {
         logger.info("🛒 Clicking on 'Checkout' button...");
         try {

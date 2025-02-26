@@ -7,6 +7,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.nio.file.Paths;
 
+/**
+ * Represents the Inventory Page in the SauceDemo UI test automation framework.
+ * Provides functionalities to interact with inventory items, add them to cart, and navigate to the cart.
+ */
 public class InventoryPage {
     private static final Logger logger = LoggerFactory.getLogger(InventoryPage.class);
     private final Page page;
@@ -20,12 +24,21 @@ public class InventoryPage {
     private final String inventoryList = ".inventory_list";
     private final String cartLink = ".shopping_cart_link";
 
+    /**
+     * Constructor for InventoryPage.
+     *
+     * @param page The Playwright page instance used for browser interactions.
+     */
     public InventoryPage(Page page) {
         this.page = page;
         this.shoppingCartBadge = page.locator(".shopping_cart_badge");
     }
 
-    // ✅ Verify Inventory Page is Visible
+    /**
+     * Verifies if the inventory page is displayed.
+     *
+     * @return {@code true} if the inventory page is visible, otherwise {@code false}.
+     */
     public boolean isInventoryPageVisible() {
         try {
             page.waitForSelector(inventoryList, new Page.WaitForSelectorOptions()
@@ -40,7 +53,10 @@ public class InventoryPage {
         }
     }
 
-    // ✅ Add Products to Cart (With Proper Logging)
+    /**
+     * Adds two predefined products to the shopping cart.
+     * Handles clicking on product images, waiting for the 'Add to Cart' button, and returning to inventory after adding items.
+     */
     public void addProductsToCart() {
         try {
             logger.info("⏩ Adding first product to cart...");
@@ -65,10 +81,15 @@ public class InventoryPage {
         } catch (Exception e) {
             captureScreenshot("debug-add-to-cart.png");
             logger.error("❌ ERROR: Failed to add items to cart. Screenshot: debug-add-to-cart.png", e);
+            throw e;
         }
     }
 
-    // ✅ Open Cart Page
+    /**
+     * Navigates to the cart page from the inventory page.
+     *
+     * @throws RuntimeException if the cart link is not found or not clickable.
+     */
     public void openCart() {
         try {
             logger.info("⏩ Navigating to the Cart Page...");
@@ -80,10 +101,15 @@ public class InventoryPage {
         } catch (Exception e) {
             captureScreenshot("debug-open-cart.png");
             logger.error("❌ ERROR: Could not open the cart. Screenshot: debug-open-cart.png", e);
+            throw e;
         }
     }
 
-    // ✅ Get Cart Item Count
+    /**
+     * Retrieves the count of items present in the shopping cart.
+     *
+     * @return The number of items in the cart. Returns 0 if the cart is empty or if retrieval fails.
+     */
     public int getCartItemCount() {
         try {
             if (shoppingCartBadge.isVisible()) {
@@ -101,7 +127,11 @@ public class InventoryPage {
         }
     }
 
-    // ✅ Utility: Capture Screenshot for Debugging
+    /**
+     * Captures a screenshot for debugging purposes.
+     *
+     * @param fileName The name of the file where the screenshot will be saved.
+     */
     private void captureScreenshot(String fileName) {
         page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get(fileName)));
     }

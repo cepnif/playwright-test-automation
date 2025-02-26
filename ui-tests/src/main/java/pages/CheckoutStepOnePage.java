@@ -7,6 +7,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import java.nio.file.Paths;
 
+/**
+ * Represents the Checkout Step One Page in the SauceDemo UI test automation framework.
+ */
 public class CheckoutStepOnePage {
     private static final Logger logger = LoggerFactory.getLogger(CheckoutStepOnePage.class);
     private final Page page;
@@ -15,6 +18,11 @@ public class CheckoutStepOnePage {
     private final Locator postalCodeField;
     private final Locator continueButton;
 
+    /**
+     * Constructor for the CheckoutStepOnePage.
+     *
+     * @param page The Playwright page instance used for browser interactions.
+     */
     public CheckoutStepOnePage(Page page) {
         this.page = page;
         this.firstNameField = page.locator("#first-name");
@@ -23,7 +31,11 @@ public class CheckoutStepOnePage {
         this.continueButton = page.locator("#continue");
     }
 
-    // ✅ Check if Checkout Page is Displayed
+    /**
+     * Checks if the Checkout Step One page is displayed.
+     *
+     * @return {@code true} if the page is visible, otherwise {@code false}.
+     */
     public boolean isCheckoutPageDisplayed() {
         String checkoutPageSelector = "#checkout_info_container";
         logger.info("🔍 Verifying if Checkout Step One page is displayed...");
@@ -42,7 +54,14 @@ public class CheckoutStepOnePage {
         }
     }
 
-    // ✅ Enter Customer Details
+    /**
+     * Fills in the customer details (first name, last name, and postal code).
+     *
+     * @param firstName  The customer's first name.
+     * @param lastName   The customer's last name.
+     * @param postalCode The customer's postal code.
+     * @throws RuntimeException if fields are not found or cannot be filled.
+     */
     public void enterCustomerDetails(String firstName, String lastName, String postalCode) {
         logger.info("✍️ Entering customer details: {} {} - {}", firstName, lastName, postalCode);
         try {
@@ -62,7 +81,11 @@ public class CheckoutStepOnePage {
         }
     }
 
-    // ✅ Click Continue Button
+    /**
+     * Clicks the 'Continue' button to proceed to the next step of checkout.
+     *
+     * @throws RuntimeException if the button is not found or not clickable.
+     */
     public void clickContinue() {
         logger.info("⏩ Clicking 'Continue' button on Checkout Step One...");
         try {
@@ -78,7 +101,11 @@ public class CheckoutStepOnePage {
         }
     }
 
-    // ✅ Utility: Capture Screenshot for Debugging
+    /**
+     * Captures a screenshot for debugging purposes.
+     *
+     * @param fileName The name of the file where the screenshot will be saved.
+     */
     private void captureScreenshot(String fileName) {
         page.screenshot(new Page.ScreenshotOptions().setPath(Paths.get(fileName)));
     }
