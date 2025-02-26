@@ -1,7 +1,7 @@
 # 🚀 Test Automation Framework: Java + Playwright (API & UI)
 
 ## 📌 Overview
-This repository contains an automated test framework built using Java + Playwright, covering API testing (Swagger Petstore API v2) and UI testing (Sauce Demo). The framework is designed for efficiency, maintainability, and scalability, supporting cross-browser execution, parallel execution, and detailed reporting.
+This repository contains a modular automation test framework built using Java + Playwright, covering API testing (Swagger Petstore API v2) and UI testing (Sauce Demo). The framework is designed for efficiency, maintainability, and scalability, supporting cross-browser execution, parallel execution, and detailed reporting.
 ## 📁 Project Structure
 ```
 playwright-test-automation/
